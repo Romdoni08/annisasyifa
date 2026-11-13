@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ketahanan Pangan - Aksi Kita</title>
+    <style>
+        /* ==========================================
+           CSS: Bagian untuk mempercantik tampilan
+           ========================================== */
+        :root {
+            --warna-utama: #2d6a4f; /* Hijau tua ala tumbuhan/alam */
+            --warna-muda: #d8f3dc;  /* Hijau lembut untuk latar kartu */
+            --warna-krem: #fefae0;  /* Warna krem latar belakang utama */
+            --warna-teks: #333333;  /* Warna teks standar agar mudah dibaca */
+            --warna-putih: #ffffff;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--warna-krem);
+            color: var(--warna-teks);
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        /* Kotak utama pembungkus konten */
+        .container {
+            max-width: 600px;
+            width: 100%;
+            background: var(--warna-putih);
+            padding: 30px;
+            border-radius: 16px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            box-sizing: border-box;
+        }
+
+        h1 {
+            color: var(--warna-utama);
+            font-size: 24px;
+            margin-top: 0;
+            text-align: center;
+        }
+
+        p.intro {
+            text-align: center;
+            color: #555;
+            font-size: 15px;
+            line-height: 1.5;
+            margin-bottom: 25px;
+        }
+
+        /* Kartu untuk 3 Tips */
+        .card {
+            background-color: var(--warna-muda);
+            padding: 15px 20px;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            border-left: 5px solid var(--warna-utama);
+        }
+
+        .card h3 {
+            margin: 0 0 5px 0;
+            color: var(--warna-utama);
+            font-size: 16px;
+        }
+
+        .card p {
+            margin: 0;
+            font-size: 14px;
+            color: #444;
+        }
+
+        /* Bagian Interaktif "Tahukah Kamu?" */
+        .interactive-box {
+            background-color: #f4f6f0;
+            border: 2px dashed var(--warna-utama);
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        button {
+            background-color: var(--warna-utama);
+            color: var(--warna-putih);
+            border: none;
+            padding: 12px 20px;
+            font-size: 15px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background 0.2s;
+            font-weight: bold;
+        }
+
+        button:hover {
+            background-color: #1b4332;
+        }
+
+        #fact-display {
+            margin-top: 15px;
+            font-style: italic;
+            color: #2d6a4f;
+            font-weight: 500;
+            min-height: 40px;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 12px;
+            color: #777;
+        }
+
+        /* Responsif untuk Layar HP yang Kecil */
+        @media (max-width: 480px) {
+            body {
+                padding: 10px;
+            }
+            .container {
+                padding: 20px;
+            }
+            h1 {
+                font-size: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <!-- Judul & Penjelasan Singkat -->
+        <h1>🌱 Ketahanan Pangan untuk Masa Depan</h1>
+        <p class="intro">
+            Ketahanan pangan adalah kondisi terpenuhinya kebutuhan pangan bagi negara hingga perseorangan, yang tercermin dari tersedianya pangan yang cukup secara jumlah maupun mutu. Yuk, kenali langkah sederhananya!
+        </p>
+
+        <!-- Daftar 3 Tips Menjaga Ketahanan Pangan -->
+        <div class="card">
+            <h3>1. Kurangi Pemborosan Makanan (Food Waste)</h3>
+            <p>Ambil makanan secukupnya dan habiskan. Membuang makanan berarti menyia-nyiakan air, energi, dan kerja keras petani.</p>
+        </div>
+
+        <div class="card">
+            <h3>2. Manfaatkan Lahan Pekarangan Rumah</h3>
+            <p>Tanam cabai, tomat, atau sayuran hidroponik sederhana di pot untuk membantu memenuhi kebutuhan dapur harian.</p>
+        </div>
+
+        <div class="card">
+            <h3>3. Dukung Produk Pangan Lokal</h3>
+            <p>Membeli hasil panen petani lokal membantu perekonomian daerah dan memangkas rantai distribusi yang terlalu panjang.</p>
+        </div>
+
+        <!-- Tombol Interaktif "Tahukah Kamu?" -->
+        <div class="interactive-box">
+            <h3>🔍 Tahukah Kamu?</h3>
+            <p>Klik tombol di bawah ini untuk melihat fakta menarik seputar pangan!</p>
+            <button id="fact-btn">Tampilkan Fakta Unik</button>
+            <p id="fact-display">"Klik tombol di atas untuk mulai melihat fakta!"</p>
+        </div>
+    </div>
+
+    <footer>
+        Dibuat khusus untuk Workshop Siswa Kelas 12 📚
+    </footer>
+
+    <script>
+        /* ==========================================
+           JAVASCRIPT: Bagian logika untuk tombol interaktif
+           ========================================== */
+
+        // 1. Menyimpan daftar fakta dalam bentuk "Array" (kumpulan data)
+        const daftarFakta = [
+            "Sepertiga dari seluruh makanan di dunia terbuang sia-sia setiap tahunnya sebelum sempat dikonsumsi!",
+            "Menanam cabai sendiri di pot rumah terbukti bisa menghemat pengeluaran bulanan keluarga lho.",
+            "Indonesia memiliki kekayaan pangan lokal yang melimpah seperti ubi, jagung, dan sagu sebagai alternatif pengganti beras.",
+            "Mengonsumsi pangan lokal menghasilkan jejak karbon (carbon footprint) yang jauh lebih kecil dibandingkan makanan impor."
+        ];
+
+        // 2. Menghubungkan elemen HTML dengan JavaScript menggunakan ID-nya
+        const tombolFakta = document.getElementById('fact-btn');
+        const tempatTeksFakta = document.getElementById('fact-display');
+
+        let indeksSebelumnya = -1;
+
+        // 3. Memberikan perintah saat tombol diklik (Event Listener)
+        tombolFakta.addEventListener('click', function() {
+            let indeksAcak;
+
+            // Perulangan kecil agar fakta yang muncul tidak sama persis dengan yang sebelumnya
+            do {
+                indeksAcak = Math.floor(Math.random() * daftarFakta.length);
+            } while (indeksAcak === indeksSebelumnya && daftarFakta.length > 1);
+
+            indeksSebelumnya = indeksAcak;
+
+            // Memasukkan teks acak ke dalam elemen paragraf di HTML
+            tempatTeksFakta.textContent = `"${daftarFakta[indeksAcak]}"`;
+        });
+    </script>
+
+</body>
+</html>
